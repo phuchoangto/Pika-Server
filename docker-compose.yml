@@ -1,0 +1,20 @@
+﻿version: "3.4"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: PikaServer.Api/Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+  
+  db:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    ports:
+      - "1433:1433"
+    
+    environment:
+      MSSQL_SA_PASSWORD: "Pika@12345"
+      ACCEPT_EULA: "Y"
